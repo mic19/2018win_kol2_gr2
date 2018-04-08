@@ -22,51 +22,68 @@
 #Your program must be runnable with command "python task.py".
 #Show some usecases of your library in the code (print some things)
 
-class Student():
-	def __init__(self, name, surname, student_id, classes):
-		self.name = name
-		self.surname = surname
-		self.student_id = student_id
-		self.list = {}
-		for class_name in classes:
-			self.list[class_name] = []#grades
+students = {}
 
-	def add_grade(self, grade, class_name):
-		pass#self.grades.append(grade)
-		#self.list[]
+diary = {}
+grades = {"1":[], "2":[], "3":[]}
+diary["math"] = grades
 
-class Diary():
-	def __init__(self):
-		self.list = {}
+grades = {"1":[], "2":[], "3":[]}
+diary["english"] = grades
 
-	def __str__(self):
-		pass
+def add_student(students, name, surname):
+	students[len(students) + 1] = (name, surname)
+	return str(len(students))
+	
+def assign_subjects(index, diary, *args):
+	for subject in args:
+		temp = diary[subject]
+		temp[index] = []
+	
+def get_student(students, index):
+	return students[index]
+	
+def add_grade(diary, index, subject, *args):
+	for grade in args:
+		diary[subject][index].append(grade)
+	
+def get_grades(diary, index, subject = None):
+	if subject == None:
+		grades_across = []
+		for subject in diary:
+			grades_across += diary[subject][index]
+		return grades_across
+	return diary[subject][index]
 
-	def add_student(self, student):
-		self.list[student.student_id] = student
-
-	def add_grade(self, student_id, class_name, grade):
-		if(self.list[student_id] != None):
-			self.list[student_id].add_grade(grade, class_name)
-
-	"""
-		self.list["class_type"] = class_type
-		self.list["grades"] = []
-
-	def add_grade(self, student_id, class_type, grade):
-		list[student_id] = student_id
-		list[class_type] = class_type
-		list[student_id] = student_id
-	"""
+def add_attendace(diary, index, subject):
+	pass
+		
+def get_attendance(diary, index, subject):
+	pass
+	
 
 
 if __name__ == "__main__":
-	diary = Diary()
-	student = Student("name", "surname", 1, ("math", "english"))
-
-	diary.add_student(student)
-	diary.add_grade(1, "math", 4)
-
-
+	print(diary)
+	index = add_student(students, "Jeremy", "Waterfall")
+	#assign_subjects(diary, index, "math", "english")
+	index = add_student(students, "Joseph", "Parker")
+	#assign_subjects(diary, index, "math", "english")
+	index = add_student(students, "Adam", "Savage")
+	#assign_subjects(diary, index, "math", "english")
+	
+	add_grade(diary, "1", "math", 2, 3, 4)
+	add_grade(diary, "2", "math", 4, 4, 5)
+	add_grade(diary, "3", "math", 5, 4, 5)
+	
+	add_grade(diary, "1", "english", 2, 4, 5)
+	add_grade(diary, "2", "english", 4, 3, 5)
+	add_grade(diary, "3", "english", 5, 4, 5)
+	
+	print(students)
+	print(diary)
+	print()
+	
+	print(get_grades(diary, "1"))
 
 
